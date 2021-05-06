@@ -26,14 +26,3 @@ for groupe_trains in trains
 end
 nb_itineraires = length(itineraires)
 nb_interdictions = length(interdictions)
-
-
-trains = naif(trains, 1)
-gp_extraits, gp_trop_petits, gp_deja_affectes = extraire(trains, 2)
-gp_extraits = naif(gp_extraits, 2)
-nouv_trains = Vector{Vector{Vector{Train}}}()
-push!(nouv_trains, gp_extraits)
-push!(nouv_trains, gp_trop_petits, gp_deja_affectes)
-trains = regrouper(nouv_trains)
-
-write_solution(path_write_sol, "PE.json", trains);
