@@ -4,7 +4,7 @@ include("naive_function.jl")
 include("parser_sortie.jl")
 
 
-path = joinpath(".", "instances/A.json")
+path = joinpath(".", "instances/NS.json")
 path_write_sol = joinpath(".", "solution_naive")
 
 dict, instance = read_instance(path)
@@ -36,4 +36,4 @@ trains = contrainte3(trains, nb_groupes, nb_interdictions)
 
 
 
-write_solution(path_write_sol, "A", trains)
+write_solution(path_write_sol, "NS.json", trains);

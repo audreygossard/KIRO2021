@@ -52,7 +52,7 @@ function itineaire_admissible_groupe(G, I)
     bool = false #false si il n y a pas d'itineraire pour le train i
     for j=1:I
       if (itineraires[j].sensDepart == G[i].sensDepart && itineraires[j].voieEnLigne == G[i].voieEnLigne && itineraires[j].voieAQuai == G[i].voieAQuai)
-        G[i].itineraire = j
+        G[i].itineraire = itineraires[j].id
         bool = true
         break #on ne cherche plus d'autre itineraire pour ce train
       end
