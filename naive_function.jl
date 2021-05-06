@@ -73,11 +73,50 @@ function voie_en_ligne(train, f)
 end
 
 function types_Materiels(train, f)
-  Materiel = 
+  liste_materiel = Set(interdictionsQuais[f].typesMateriels)
+  Materiel = Set(train.typesMateriels)
+  return intersect(liste_materiel, Materiel).size() > 0
+end
+
+function types_Circulation(train, f)
+  liste_circulation = interdictionsQuais[f].typesCirculation
+  et = train.typeCirculation
+  return et in liste_circulation
+end
+
+function quai_interdit(train, f)
+  qt = train.voieAQuai
+  Qf = interdictionsQuais[f].voiesAQuaiInterdites
+  retunr qt in Qf
+end
 
 function contrainte3_groupe(G)
-  admissile = true
+  admissible = true
   #N = nombre de train dans G
   #F = nombre d'interdictions
   for i=1:N
     for f=1:F
+      if (voie_en_ligne(G[i], f) || types_Materiels(G[i], f) || types_Circulation(G[i], f))
+        if quai_interdit(G[i], f)
+          #abort
+          admissible = false
+          break
+        end
+    end
+    if admissile == False
+      break
+    end
+  end
+  if admissible == false
+    G = affecte_quai_train("Notaffected", G)
+  end
+  return G
+end
+
+
+function contrainte3(trains)
+  for i=1:NG
+    trains[i] = contrainte3_groupe(trains[i])
+  end
+  return trains
+end
