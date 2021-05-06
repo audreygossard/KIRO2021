@@ -19,5 +19,5 @@ interdictions = dict["interdictionsQuais"]
 nb_groupes = length(dict["trains"])
 nb_trains = length(trains)
 
-
+trains = affecte_quai_train(trains, nb_groupes)
 #write_solution(sol, path_write_sol)
