@@ -4,7 +4,7 @@ function affecte_quai_train(qt, G)
   #N = nombre de train dans G
   N = length(G)
   for i=1:N
-    G[i].voieAQuai = gt
+    G[i].voieAQuai = qt
   end
   return G
 end
@@ -30,7 +30,7 @@ end
 function contrainte2(trains, NG)
   #NG = nombre de groupes
   for i=1:NG #pour  chaque groupe
-    qt = trains[i, 1].voieAQuai
+    qt = trains[i][1].voieAQuai
     trains[i] = affecte_quai_train(qt, trains[i])
   end
   return trains
@@ -53,16 +53,16 @@ function itineaire_admissible_groupe(G, I)
     for j=1:I
       if (itineraires[j].sensDepart == G[i].sensDepart && itineraires[j].voieEnLigne == G[i].voieEnLigne && itineraires[j].voieAQuai == G[i].voieAQuai)
         G[i].itineraire = j
-        bool = True
+        bool = true
         break #on ne cherche plus d'autre itineraire pour ce train
       end
     end
-    if not(bool) #on a trouve aucun itineraire
+    if !(bool) #on a trouve aucun itineraire
       itineraires_admissibles = false #on met tout le monde a it nul et qt nul
       break #on arrete de tout parcourir
     end
   end
-  if not(itineaires_admissibles)
+  if !(itineaires_admissibles)
     G = affecte_quai_train("NotAffected", G)
     G = affecte_itineraire_train(-1, G)
   end
@@ -70,15 +70,15 @@ function itineaire_admissible_groupe(G, I)
 end
 
 
-function contrainte1(trains, NG)
+function contrainte1(trains, NG,I)
   #NG = nombre de groupes
   for i=1:NG #pour  chaque groupe
-    trains[i] = itineaire_admissible_groupe(trains[i])
+    trains[i] = itineaire_admissible_groupe(trains[i], I)
   end
   return trains
 end
 
-
+#=
 
 #######################################
 #
@@ -107,7 +107,7 @@ end
 function quai_interdit(train, f)
   qt = train.voieAQuai
   Qf = interdictionsQuais[f].voiesAQuaiInterdites
-  retunr qt in Qf
+  return qt in Qf
 end
 
 function contrainte3_groupe(G)
@@ -140,3 +140,4 @@ function contrainte3(trains)
   end
   return trains
 end
+=#

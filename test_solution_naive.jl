@@ -1,6 +1,6 @@
 include("parser.jl")
 #include("solution.jl")
-#include("naive_function.jl")
+include("naive_function.jl")
 
 
 path = joinpath(".", "instances/A.json")
@@ -18,9 +18,12 @@ interdictions = dict["interdictionsQuais"]
 
 nb_groupes = length(dict["trains"])
 nb_trains = length(trains)
+nb_itineraires = length(itineraires)
 
 #contrainte 2
 trains = contrainte2(trains, nb_groupes)
 #contrainte 1
+#est ce que ça fonctionne vraiment??
+trains = contrainte1(trains, nb_groupes, nb_itineraires)
 
 #write_solution(sol, path_write_sol)
