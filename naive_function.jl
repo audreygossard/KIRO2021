@@ -63,7 +63,7 @@ function itineaire_admissible_groupe(G, I)
     end
   end
   if !(itineaires_admissibles)
-    G = affecte_quai_train("NotAffected", G)
+    G = affecte_quai_train("notAffected", G)
     G = affecte_itineraire_train(-1, G)
   end
   return G
