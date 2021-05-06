@@ -95,7 +95,7 @@ end
 function types_Materiels(train, interdiction)
   liste_materiel = Set(interdiction["typesMateriels"])
   Materiel = Set(train.typesMateriels)
-  return intersect(liste_materiel, Materiel).size() > 0
+  return length(intersect(liste_materiel, Materiel)) > 0
 end
 
 function types_Circulation(train, interdiction)
@@ -107,7 +107,8 @@ end
 function quai_interdit(train, interdiction)
   qt = train.voieAQuai
   Qf = interdiction["voiesAQuaiInterdites"]
-  retunr qt in Qf
+  bool = (qt in Qf)
+  return bool
 end
 
 function contrainte3_groupe(G, F)
@@ -118,14 +119,13 @@ function contrainte3_groupe(G, F)
   for i=1:N
     for f=1:F
       interdiction = interdictions[f]
-      if (voie_en_ligne(G[i], interdiction) || types_Materiels(G[i], interdiction) || types_Circulation(G[i], interdiction))
-        if quai_interdit(G[i], interdiction)
-          #abort
-          admissible = false
-          break
-        end
+      if (voie_en_ligne(G[i], interdiction) || types_Materiels(G[i], interdiction) || types_Circulation(G[i], interdiction)) && quai_interdit(G[i], interdiction)
+        #abort
+        admissible = false
+        break
+      end
     end
-    if admissile == False
+    if admissible == false
       break
     end
   end
@@ -137,9 +137,9 @@ end
 
 
 
-function contrainte3(trains, NG)
+function contrainte3(trains, NG, F)
   for i=1:NG
-    trains[i] = contrainte3_groupe(trains[i])
+    trains[i] = contrainte3_groupe(trains[i], F)
   end
   return trains
 end
