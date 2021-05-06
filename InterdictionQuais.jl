@@ -3,7 +3,7 @@ struct InterdictionQuais
     voiesEnLigne::Vector{String}
     typesMateriels::Vector{Int}
     typesCirculation::Vector{String} # Ou Int ?
-    Itineraire(; voiesAQuaiInterdites, voieEnLigne, typesCirculation, voieAQuai) = new(voiesAQuaiInterdites, voieEnLigne, typesCirculation, voieAQuai)
+    InterdictionQuai(; voiesAQuaiInterdites, voiesEnLigne, typesMateriels, typesCirculation) = new(voiesAQuaiInterdites, voiesEnLigne, typesMateriels, typesCirculation)
 end
 
 function Base.show(io::IO, interdic::InterdictionQuais)
