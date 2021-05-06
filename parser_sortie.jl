@@ -2,10 +2,12 @@ include("train.jl")
 
 function write_solution(path::String, instance_name::String, trains::Vector{Train})
 	gros_dico = Dict()
-	for i in 1:length(trains)
-        train = trains[i]
-		gros_dico[string(train.id)] = train_into_dict(train)
-		println(string(train.id),JSON.json(train_into_dict(train)))
+	for g in 1:length(trains)
+		groupe = trains[g]
+		for i in 1:lenght(groupe)
+	        train = groupe[i]
+			gros_dico[string(train.id)] = train_into_dict(train)
+		end
     end
 	# pass data as a json string (how it shall be displayed in a file)
 	stringdata = JSON.json(gros_dico)
@@ -13,5 +15,5 @@ function write_solution(path::String, instance_name::String, trains::Vector{Trai
 	open(file_name, "w") do f
 	     write(f, stringdata)
 	end
-	return nothing
+	return stringdata
 end
