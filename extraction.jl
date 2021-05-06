@@ -19,3 +19,16 @@ function extraire(trains::Vector{Vector{Train}}, taille_min::Int)
     end
 	return groupes_extraits, groupes_trop_petits, groupes_deja_affectes
 end
+
+
+function regrouper(all_listes::Vector{Vector{Vector{Train}}})::Vector{Vector{Train}}
+	all_groups = Vector{Vector{Train}}()
+	for indice_liste in 1:length(all_listes)
+		liste = all_listes[indice_liste] #Vector{Vector{Train}
+		for g in 1:length(trains)
+			groupe = trains[g]
+			push!(all_groups, groupe)
+	    end
+	end
+	return all_groups
+end
