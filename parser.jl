@@ -34,6 +34,7 @@ function read_instance(path::String)#::Instance
 
 	voieEnLigne = dict["voiesEnLigne"]
 
+#=
 	for interdictionQuais in dict["interdictionsQuais"]
 		println(interdictionQuais["voiesAQuaiInterdites"])
 		println(interdictionQuais["voiesEnLigne"])
@@ -43,10 +44,12 @@ function read_instance(path::String)#::Instance
 		InterdictionQuais(voiesAQuaiInterdites=interdictionQuais["voiesAQuaiInterdites"], voiesEnLigne=interdictionQuais["voiesEnLigne"],
 						 typesMateriels=interdictionQuais["typesMateriels"], typesCirculation=interdictionQuais["typesCirculation"]))
 	end
-
+=#
 	contraintes = dict["contraintes"]
 
+	#instance = Instance(trains=trains, itineraires=itineraires, voiesAQuai=voiesAQuai,
+	#voiesEnLigne=voiesEnLigne, interdictionsQuais=interdictionsQuais, contraintes=contraintes)
 	instance = Instance(trains=trains, itineraires=itineraires, voiesAQuai=voiesAQuai,
-	voiesEnLigne=voiesEnLigne, interdictionsQuais=interdictionsQuais, contraintes=contraintes)
-	return dict["interdictionsQuais"]
+	voiesEnLigne=voiesEnLigne, contraintes=contraintes)
+	return instance
 end
