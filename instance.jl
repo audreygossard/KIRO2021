@@ -17,7 +17,7 @@ end
 =#
 
 mutable struct Instance
-    trains::Vector{Train}
+    trains::Vector{Vector{Train}}
     itineraires::Vector{Itineraire}
     voiesAQuai::Vector{String}
     voiesEnLigne::Vector{String}
