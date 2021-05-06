@@ -16,4 +16,8 @@ contraintes = instance.contraintes
 
 interdictions = dict["interdictionsQuais"]
 
+nb_groupes = length(dict["trains"])
+nb_trains = length(trains)
+
+
 #write_solution(sol, path_write_sol)
