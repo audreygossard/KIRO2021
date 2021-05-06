@@ -1,3 +1,4 @@
+
 struct Train
     id::Int
     sensDepart::Bool

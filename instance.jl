@@ -10,6 +10,6 @@ struct Instance
     interdictionsQuais::Vector{InterdictionQuais}
     contraintes::Vector{Vector{Int}}
 
-    Instance(; trains, itineraires, voiesAQuai, voiesEnLigne, interdicitonsQuais, contraintes) =
-        new(trains, itineraires, voiesAQuai, voiesEnLigne, interdicitonsQuais, contraintes)
+    Instance(; trains, itineraires, voiesAQuai, voiesEnLigne, interdictionsQuais, contraintes) =
+        new(trains, itineraires, voiesAQuai, voiesEnLigne, interdictionsQuais, contraintes)
 end
