@@ -5,8 +5,12 @@ struct Train
     voieAQuai::String
     typeCirculation::String
     dateHeure::String
+<<<<<<< Updated upstream
     typesMateriels::String
 	itineraire::Int
+=======
+    typesMateriels::Vector{String}
+>>>>>>> Stashed changes
 
     Train(; id, sensDepart, voieEnLigne, voieAQuai, typeCirculation, dateHeure, typesMateriels) =
         new(id, sensDepart, voieEnLigne, voieAQuai, typeCirculation, dateHeure, typesMateriels, -1)
