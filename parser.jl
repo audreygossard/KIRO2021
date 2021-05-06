@@ -51,5 +51,5 @@ function read_instance(path::String)#::Instance
 	#voiesEnLigne=voiesEnLigne, interdictionsQuais=interdictionsQuais, contraintes=contraintes)
 	instance = Instance(trains=trains, itineraires=itineraires, voiesAQuai=voiesAQuai,
 	voiesEnLigne=voiesEnLigne, contraintes=contraintes)
-	return instance
+	return dict, instance
 end
