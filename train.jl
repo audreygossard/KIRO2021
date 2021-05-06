@@ -7,6 +7,6 @@ struct Train
     dateHeure::String
     typesMateriels::String
 
-    Instance(; id, sensDepart, voieEnLigne, voieAQuai, typeCirculation, dateHeuren typesMateriels) =
-        new(id, sensDepart, voieEnLigne, voieAQuai, typeCirculation, dateHeuren typesMateriels)
+    Train(; id, sensDepart, voieEnLigne, voieAQuai, typeCirculation, dateHeure, typesMateriels) =
+        new(id, sensDepart, voieEnLigne, voieAQuai, typeCirculation, dateHeure, typesMateriels)
 end
