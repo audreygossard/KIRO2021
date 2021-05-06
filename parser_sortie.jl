@@ -1,10 +1,10 @@
 include("train.jl")
 
-function write_solution(path::String, instance_name::String, trains::Vector{Train})
+function write_solution(path::String, instance_name::String, trains::Vector{Vector{Train}})
 	gros_dico = Dict()
 	for g in 1:length(trains)
 		groupe = trains[g]
-		for i in 1:lenght(groupe)
+		for i in 1:length(groupe)
 	        train = groupe[i]
 			gros_dico[string(train.id)] = train_into_dict(train)
 		end
