@@ -1,5 +1,7 @@
 include("train.jl")
 
+
+
 function write_solution(path::String, instance_name::String, trains::Vector{Vector{Train}})
 	gros_dico = Dict()
 	for g in 1:length(trains)
