@@ -17,9 +17,11 @@ end
 function train_into_dict(train::Train)::Dict
 	if train.itineraire == -1
 		itineraire = "notAffected"
+		voieAQuai = "notAffected"
 	else
 		itineraire = string(train.itineraire)
+		voieAQuai = train.voieAQuai
 	end
-    dico = Dict("voieAQuai" => train.voieAQuai, "itineraire" => itineraire)
+    dico = Dict("voieAQuai" => voieAQuai, "itineraire" => itineraire)
 	return dico
 end
