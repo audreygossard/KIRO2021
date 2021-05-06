@@ -9,12 +9,12 @@ function extraire(trains::Vector{Vector{Train}}, taille_min::Int)
 		if train.itineraire ==-1 # Pas d'itinéraire affecté au groupe
 			taille_groupe = length(groupe)
 			if taille_groupe >= taille_min
-				push!(groupe, groupes_extraits)
+				push!(groupes_extraits, groupe)
 			else # groupe trop petit
-				push!(groupe,groupes_trop_petits)
+				push!(groupes_trop_petits, groupe)
 			end
 		else # Le groupe a déjà un itinéraire
-			push!(groupe, groupes_deja_affectes)
+			push!(groupes_deja_affectes, groupe)
 		end
     end
 	return groupes_extraits, groupes_trop_petits, groupes_deja_affectes
