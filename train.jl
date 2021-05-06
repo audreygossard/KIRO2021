@@ -7,10 +7,11 @@ struct Train
     typeCirculation::String
     dateHeure::String
     typesMateriels::Vector{String}
+	groupe::Int
 	itineraire::Int
 
-    Train(; id, sensDepart, voieEnLigne, voieAQuai, typeCirculation, dateHeure, typesMateriels, itineraire) =
-        new(id, sensDepart, voieEnLigne, voieAQuai, typeCirculation, dateHeure, typesMateriels, -1)
+    Train(; id, sensDepart, voieEnLigne, voieAQuai, typeCirculation, dateHeure, typesMateriels, groupe, itineraire) =
+        new(id, sensDepart, voieEnLigne, voieAQuai, typeCirculation, dateHeure, typesMateriels, groupe, -1)
 end
 
 function train_into_dict(train::Train)::Dict

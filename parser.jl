@@ -12,13 +12,16 @@ function read_instance(path::String)#::Instance
 	interdictionsQuais = Vector{InterdictionQuais}()
 	contraintes = Vector{Vector{Int}}()
 
-	for ltrain in dict["trains"]
-		train = ltrain[1]
-		push!(trains,
-		Train(id=train["id"], sensDepart=train["sensDepart"],
-		      voieEnLigne=train["voieEnLigne"], voieAQuai=train["voieAQuai"],
-			  typeCirculation=train["typeCirculation"], dateHeure=train["dateHeure"],
-			  typesMateriels=train["typesMateriels"], itineraire=-1))
+	for groupe_trains in dict["trains"]
+		g=0
+		for train in groupe_trains
+			g+=1
+			push!(trains,
+			Train(id=train["id"], sensDepart=train["sensDepart"],
+			      voieEnLigne=train["voieEnLigne"], voieAQuai=train["voieAQuai"],
+				  typeCirculation=train["typeCirculation"], dateHeure=train["dateHeure"],
+				  typesMateriels=train["typesMateriels"], groupe=g, itineraire=-1))
+		end
 	end
 
 	for itineraire in dict["itineraires"]
@@ -32,8 +35,12 @@ function read_instance(path::String)#::Instance
 	voieEnLigne = dict["voiesEnLigne"]
 
 	for interdictionQuais in dict["interdictionsQuais"]
+		println(interdictionQuais["voiesAQuaiInterdites"])
+		println(interdictionQuais["voiesEnLigne"])
+		println(interdictionQuais["typesMateriels"])
+		println(interdictionQuais["typesCirculation"])
 		push!(interdictionsQuais,
-		InterdictionQuai(voiesAQuaiInterdites=interdictionQuais["voiesAQuaiInterdites"], voiesEnLigne=interdictionQuais["voiesEnLigne"],
+		InterdictionQuais(voiesAQuaiInterdites=interdictionQuais["voiesAQuaiInterdites"], voiesEnLigne=interdictionQuais["voiesEnLigne"],
 						 typesMateriels=interdictionQuais["typesMateriels"], typesCirculation=interdictionQuais["typesCirculation"]))
 	end
 
@@ -41,5 +48,5 @@ function read_instance(path::String)#::Instance
 
 	instance = Instance(trains=trains, itineraires=itineraires, voiesAQuai=voiesAQuai,
 	voiesEnLigne=voiesEnLigne, interdictionsQuais=interdictionsQuais, contraintes=contraintes)
-	return instance
+	return dict["interdictionsQuais"]
 end
