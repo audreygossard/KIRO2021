@@ -1,11 +1,11 @@
 include("Train.jl")
 function extraire(trains::Vector{Vector{Train}}, taille_min::Int)
-	groupes_trop_petits_extraits = Vector{Vector{Train}}()
+	groupes_extraits = Vector{Vector{Train}}()
 	groupes_trop_petits = Vector{Vector{Train}}()
 	groupes_deja_affectes = Vector{Vector{Train}}()
     for g in 1:length(trains)
 		groupe = trains[g]
-        train = groupe[i]
+        train = groupe[1]
 		if train.itineraire ==-1 # Pas d'itinéraire affecté au groupe
 			taille_groupe = length(groupe)
 			if taille_groupe >= taille_min

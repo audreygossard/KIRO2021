@@ -27,10 +27,10 @@ end
 #######################################
 
 #on affecte a chaque train d'un groupe le meme quai que le premier train du groupe
-function contrainte2(trains, NG)
+function contrainte2(trains, NG, n)
   #NG = nombre de groupes
   for i=1:NG #pour  chaque groupe
-    qt = trains[i][1].voieAQuai
+    qt = trains[i][n].voieAQuai
     trains[i] = affecte_quai_train(qt, trains[i])
   end
   return trains

@@ -6,8 +6,8 @@ include("extraction.jl")
 include("parser_sortie.jl")
 
 
-path = joinpath(".", "instances/NS.json")
-path_write_sol = joinpath(".", "solution_naive")
+path = joinpath(".", "instances/PE.json")
+path_write_sol = joinpath(".", "solution_naive2")
 
 dict, instance = read_instance(path)
 
@@ -28,12 +28,12 @@ nb_itineraires = length(itineraires)
 nb_interdictions = length(interdictions)
 println(nb_interdictions)
 
-trains = naif(trains, n=1)
+trains = naif(trains, 1)
 gp_extraits, gp_trop_petits, gp_deja_affectes = extraire(trains, 2)
-gp_extraits = naif(gp_extraits, n=2)
+gp_extraits = naif(gp_extraits, 2)
 nouv_trains = Vector{Vector{Vector{Train}}}()
-push!(nouv_trains, grp_extraits)
-push!(nouv_trains, grp_trop_petits, grp_deja_affectes)
+push!(nouv_trains, gp_extraits)
+push!(nouv_trains, gp_trop_petits, gp_deja_affectes)
 trains = regrouper(nouv_trains)
 
-write_solution(path_write_sol, "NS.json", trains);
+write_solution(path_write_sol, "PE.json", trains);
