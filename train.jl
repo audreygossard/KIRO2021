@@ -1,5 +1,5 @@
 
-struct Train
+mutable struct Train
     id::Int
     sensDepart::Bool
     voieEnLigne::String
