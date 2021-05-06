@@ -87,31 +87,30 @@ end
 #######################################
 
 function voie_en_ligne(train, interdiction)
-  interdiction = interdictions[f]["key"]
-  liste_voies_ligne = interdictionsQuais[f].voiesEnLigne
+  liste_voies_ligne = interdiction["voiesEnLigne"]
   lt = train.voieEnLigne
   return lt in liste_voies_ligne
 end
 
-function types_Materiels(train, f)
-  liste_materiel = Set(interdictionsQuais[f].typesMateriels)
+function types_Materiels(train, interdiction)
+  liste_materiel = Set(interdiction["typesMateriels"])
   Materiel = Set(train.typesMateriels)
   return intersect(liste_materiel, Materiel).size() > 0
 end
 
-function types_Circulation(train, f)
-  liste_circulation = interdictionsQuais[f].typesCirculation
+function types_Circulation(train, interdiction)
+  liste_circulation = interdiction["typesCirculation"]
   et = train.typeCirculation
   return et in liste_circulation
 end
 
-function quai_interdit(train, f)
+function quai_interdit(train, interdiction)
   qt = train.voieAQuai
-  Qf = interdictionsQuais[f].voiesAQuaiInterdites
+  Qf = interdiction["voiesAQuaiInterdites"]
   retunr qt in Qf
 end
 
-function contrainte3_groupe(G)
+function contrainte3_groupe(G, F)
   admissible = true
   N = length(G)
   #N = nombre de train dans G
@@ -138,7 +137,7 @@ end
 
 
 
-function contrainte3(trains)
+function contrainte3(trains, NG)
   for i=1:NG
     trains[i] = contrainte3_groupe(trains[i])
   end
