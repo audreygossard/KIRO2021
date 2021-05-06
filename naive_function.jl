@@ -130,7 +130,7 @@ function contrainte3_groupe(G, F)
     end
   end
   if admissible == false
-    G = affecte_quai_train("Notaffected", G)
+    G = affecte_itineraire_train(-1, G)
   end
   return G
 end
