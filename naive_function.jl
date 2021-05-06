@@ -134,6 +134,7 @@ function contrainte3_groupe(G)
 end
 
 
+
 function contrainte3(trains)
   for i=1:NG
     trains[i] = contrainte3_groupe(trains[i])
