@@ -4,7 +4,7 @@ function affecte_quai_train(qt, G)
   #N = nombre de train dans G
   N = length(G)
   for i=1:N
-    G[i].voieAQuai = qt
+    G[i].voieAQuai = gt
   end
   return G
 end
@@ -30,7 +30,7 @@ end
 function contrainte2(trains, NG)
   #NG = nombre de groupes
   for i=1:NG #pour  chaque groupe
-    qt = trains[i][1].voieAQuai
+    qt = trains[i, 1].voieAQuai
     trains[i] = affecte_quai_train(qt, trains[i])
   end
   return trains
@@ -57,12 +57,12 @@ function itineaire_admissible_groupe(G, I)
         break #on ne cherche plus d'autre itineraire pour ce train
       end
     end
-    if !(bool) #on a trouve aucun itineraire
+    if not(bool) #on a trouve aucun itineraire
       itineraires_admissibles = false #on met tout le monde a it nul et qt nul
       break #on arrete de tout parcourir
     end
   end
-  if !(itineaires_admissibles)
+  if not(itineaires_admissibles)
     G = affecte_quai_train("NotAffected", G)
     G = affecte_itineraire_train(-1, G)
   end
@@ -70,15 +70,15 @@ function itineaire_admissible_groupe(G, I)
 end
 
 
-function contrainte1(trains, NG,I)
+function contrainte1(trains, NG)
   #NG = nombre de groupes
   for i=1:NG #pour  chaque groupe
-    trains[i] = itineaire_admissible_groupe(trains[i], I)
+    trains[i] = itineaire_admissible_groupe(trains[i])
   end
   return trains
 end
 
-#=
+
 
 #######################################
 #
@@ -86,7 +86,8 @@ end
 #
 #######################################
 
-function voie_en_ligne(train, f)
+function voie_en_ligne(train, interdiction)
+  interdiction = interdictions[f]["key"]
   liste_voies_ligne = interdictionsQuais[f].voiesEnLigne
   lt = train.voieEnLigne
   return lt in liste_voies_ligne
@@ -107,17 +108,19 @@ end
 function quai_interdit(train, f)
   qt = train.voieAQuai
   Qf = interdictionsQuais[f].voiesAQuaiInterdites
-  return qt in Qf
+  retunr qt in Qf
 end
 
 function contrainte3_groupe(G)
   admissible = true
+  N = length(G)
   #N = nombre de train dans G
   #F = nombre d'interdictions
   for i=1:N
     for f=1:F
-      if (voie_en_ligne(G[i], f) || types_Materiels(G[i], f) || types_Circulation(G[i], f))
-        if quai_interdit(G[i], f)
+      interdiction = interdictions[f]
+      if (voie_en_ligne(G[i], interdiction) || types_Materiels(G[i], interdiction) || types_Circulation(G[i], interdiction))
+        if quai_interdit(G[i], interdiction)
           #abort
           admissible = false
           break
@@ -140,4 +143,3 @@ function contrainte3(trains)
   end
   return trains
 end
-=#
