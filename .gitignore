@@ -26,3 +26,6 @@ instances/A.json
 instances/NS.json
 instances/PE.json
 instances/PMP.json
+solution_naive/solutions/NS.json
+solution_naive/solutions/PE.json
+solution_naive/solutions/PMP.json
